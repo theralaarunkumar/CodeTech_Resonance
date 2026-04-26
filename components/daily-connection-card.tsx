@@ -387,10 +387,11 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 mb-4 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
                        {task.category}
                      </span>
-                      <h3 className="text-lg font-black text-white mb-2 leading-tight px-6 text-center">{task.title}</h3>
-                     <p className="text-base text-stone-300 max-w-xl mx-auto leading-relaxed">
+                      <h3 className="text-md font-black text-white mb-2 leading-tight px-6 text-center">{task.title}</h3>
+                     <div className="max-w-[240px] mx-auto text-center mt-2 px-4"><p className="text-[13px] text-stone-300 leading-relaxed font-semibold">
+
                        {task.description}
-                     </p>
+                     </p></div>
                      {!task.is_completed && (
                        <p className="text-[10px] text-stone-500 mt-6 uppercase tracking-widest font-bold flex items-center gap-2">
                          <Sparkles className="w-3 h-3" /> Click to reveal AI Insight
@@ -406,9 +407,9 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                      <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 mb-6 flex items-center gap-2">
                         <Brain className="w-4 h-4" /> AI SYNTHESIS
                      </h4>
-                     <p className="text-base font-medium text-stone-200 leading-relaxed italic max-w-lg">
+                     <div className="max-w-[250px] mx-auto text-center px-6"><p className="text-[13px] font-medium text-stone-200 leading-relaxed italic">
                        "{task.ai_insight || "Based on your current resonance, this activity is perfectly timed to foster growth and equilibrium."}"
-                     </p>
+                     </p></div>
                      <p className="text-xs text-amber-500/50 mt-8 font-mono">
                        Tap to flip back
                      </p>
