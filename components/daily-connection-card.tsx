@@ -52,6 +52,8 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
         const diff = midnight.getTime() - now.getTime()
         if (diff <= 0) {
           setTimeLeft("00:00:00")
+          // When the countdown hits zero, force a reload to unlock the new day's task
+          window.location.reload()
           return
         }
         const hours = Math.floor(diff / (1000 * 60 * 60))
