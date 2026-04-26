@@ -1,11 +1,29 @@
 # Resonance: AI-Powered Relationship Nurturing
+**Team CodeTech** | [Live Application](https://resonance-hackathon.vercel.app/)
 
 ![Resonance Banner](https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=2070)
 
 ## 🌟 The Vision
 **Resonance** is a premium relationship engagement platform designed to bridge the emotional gap in modern, busy lives. By leveraging AI to synthesize partner moods and preferences, Resonance provides personalized, low-friction daily rituals that nurture deeper connections without the cognitive load of planning.
 
-Built for the **April 2026 Hackathon**, Resonance focuses on **Agentic AI**—acting as an invisible concierge that understands your relationship's "Pulse" and guides you toward meaningful interactions.
+---
+
+## 🤖 AI Usage Explanation
+Resonance uses **Google Gemini Pro** as the core "Agentic" engine. 
+- **Contextual Synthesis**: The AI doesn't just pull from a list. It takes Partner A's vibe (e.g. "Stressed"), Partner B's vibe (e.g. "Relaxed"), and their current bandwidth to generate a one-off task that bridges the emotional gap.
+- **Sentiment Analysis**: Gemini analyzes past feedback notes and ratings (User Journey) to refine future ritual suggestions.
+- **Constraint-Based Generation**: The AI is strictly prompted to return rituals that are low-friction and "doable" within the detected energy constraints of the couple.
+
+---
+
+## ✅ User Stories Completed
+- **Secure Authentication**: Users can register, login, and maintain a private profile.
+- **Partner Handshake**: A unique invite-code system allows two users to securely bond their accounts.
+- **Daily Vibe-Check (Mandatory)**: Users are guided through a forced onboarding ritual to capture their emotional "Snapshot" for the day.
+- **AI Task Synthesis**: Both partners must check-in for the AI to unlock the day's connection ritual.
+- **Interactive Rituals**: 3D-flipping cards reveal the task and a hidden personal AI Insight.
+- **Feedback & Journey**: Users rate rituals and track their relationship "Pulse" over time in a persistent history view.
+- **Automatic Lifecycle**: A 24-hour sentinel resets the dashboard at midnight for the next day's streak.
 
 ---
 
