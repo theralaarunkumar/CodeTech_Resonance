@@ -79,5 +79,15 @@ export async function saveOnboarding(data: any) {
   })
 
   if (error) return { error: error.message }
+
+  // Initialize the profile vibe so the dashboard redirect is satisfied
+  await supabase.from('profiles').update({
+    personal_vibe: 'Relaxed', // Default starting point
+    intensity_level: 50,
+    vibe_updated_at: new Date().toISOString()
+  }).eq('id', user.id)
+
+  revalidatePath('/dashboard')
+  revalidatePath('/onboarding')
   return { success: true }
 }
