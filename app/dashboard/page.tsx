@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { DashboardHeader } from "@/components/dashboard-header"
 import { DailyConnectionCard } from "@/components/daily-connection-card"
 import { PartnerLinkForm } from "@/components/partner-link-form"
+import { ConnectionCodeCard } from "@/components/connection-code-card"
 import { NavigationBar } from "@/components/navigation-bar"
 import { WeeklyResonance } from "@/components/weekly-resonance"
 import { VibeController } from "@/components/vibe-controller"
@@ -58,29 +59,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
       partnerId = profile.partner_id;
       userVibe = profile.personal_vibe;
       userIntensity = profile.intensity_level || 50;
-
-      if (!profile.invite_code) {
-        const code = "RES-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-        await supabase.from("profiles").update({ invite_code: code }).eq("id", data.user.id);
-        const { data: refreshedProfile } = await supabase
-          .from("profiles")
-          .select("invite_code")
-          .eq("id", data.user.id)
-          .single();
-        inviteCode = refreshedProfile?.invite_code || code;
-      } else {
-        inviteCode = profile.invite_code;
-      }
-    } else {
-      const code = "RES-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-      await supabase.from("profiles").upsert({ id: data.user.id, invite_code: code }, { onConflict: "id" });
-      const { data: finalFetch } = await supabase
-        .from("profiles")
-        .select("invite_code, partner_id")
-        .eq("id", data.user.id)
-        .maybeSingle();
-      inviteCode = finalFetch?.invite_code || code;
-      partnerId = finalFetch?.partner_id;
+      inviteCode = profile.invite_code;
     }
 
     if (partnerId) {
@@ -197,17 +176,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
               {/* Column A */}
-              <Card className="group relative bg-white/[0.03] backdrop-blur-md border border-white/10 p-1 rounded-[1.5rem] transition-all duration-500 hover:border-amber-500/40 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] overflow-hidden">
-                <CardHeader className="py-4">
-                  <CardTitle className="text-xl font-bold text-stone-200">Your Connection Code</CardTitle>
-                  <CardDescription className="text-stone-400 text-xs">Share this code with your partner to manually securely link your Resonance accounts.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4 pb-4">
-                  <div className="flex items-center justify-between bg-stone-950/50 border border-white/5 rounded-xl p-4 backdrop-blur-sm group-hover:border-amber-500/20 transition-colors">
-                    <span className="text-2xl font-mono tracking-widest font-bold text-amber-400 drop-shadow-[0_0_10px_rgba(245,158,11,0.3)]">{inviteCode}</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <ConnectionCodeCard initialCode={inviteCode} />
 
               {/* Column B */}
               <Card className="group relative bg-white/[0.03] backdrop-blur-md border border-white/10 p-1 rounded-[1.5rem] transition-all duration-500 hover:border-amber-500/40 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]">
