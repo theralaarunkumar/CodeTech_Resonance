@@ -403,7 +403,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                  <motion.div 
                    initial={{ opacity: 0, scale: 0.95 }}
                    animate={{ opacity: 1, scale: 1 }}
-                   className="flex flex-col items-center gap-4 mt-10 w-full"
+                   className="flex flex-col items-center gap-4 mt-6 w-full"
                  >
                      <h4 className="text-2xl text-white font-medium bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-4">How was this experience?</h4>
                      <div className="flex gap-3">
