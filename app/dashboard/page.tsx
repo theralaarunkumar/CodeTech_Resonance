@@ -86,12 +86,12 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
 
       if (allTasks && allTasks.length > 0) {
         const absoluteLatest = allTasks[0];
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const taskDate = new Date(absoluteLatest.created_at);
-        taskDate.setHours(0, 0, 0, 0);
+        const latestTaskTime = new Date(absoluteLatest.created_at).getTime();
+        const currentTime = new Date().getTime();
+        const hoursSinceTask = (currentTime - latestTaskTime) / (1000 * 60 * 60);
 
-        if (taskDate.getTime() === today.getTime() || (new Date().getTime() - new Date(absoluteLatest.created_at).getTime() < 18 * 60 * 60 * 1000)) {
+        // If a task exists from the last 24 hours, the day is NOT empty
+        if (hoursSinceTask < 24) {
           if (absoluteLatest.rating !== null) {
             hasCompletedToday = true;
             latestTask = null;
@@ -100,6 +100,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             hasCompletedToday = false;
           }
         } else {
+          // Task is older than 24 hours - time for a new one!
           latestTask = null;
           hasCompletedToday = false;
         }

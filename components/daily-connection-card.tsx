@@ -387,7 +387,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 mb-4 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
                        {task.category}
                      </span>
-                     <h3 className="text-2xl font-bold text-white mb-3">{task.title}</h3>
+                      <h3 className="text-xl font-bold text-white mb-2">{task.title}</h3>
                      <p className="text-base text-stone-300 max-w-xl mx-auto leading-relaxed">
                        {task.description}
                      </p>
@@ -406,7 +406,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                      <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 mb-6 flex items-center gap-2">
                         <Brain className="w-4 h-4" /> AI SYNTHESIS
                      </h4>
-                     <p className="text-2xl font-medium text-stone-200 leading-relaxed italic max-w-lg">
+                     <p className="text-base font-medium text-stone-200 leading-relaxed italic max-w-lg">
                        "{task.ai_insight || "Based on your current resonance, this activity is perfectly timed to foster growth and equilibrium."}"
                      </p>
                      <p className="text-xs text-amber-500/50 mt-8 font-mono">
@@ -420,7 +420,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                  <motion.div 
                    initial={{ opacity: 0, scale: 0.95 }}
                    animate={{ opacity: 1, scale: 1 }}
-                   className="flex flex-col items-center gap-4 mt-6 w-full"
+                   className="flex flex-col items-center gap-2 mt-4 w-full"
                  >
                       <h4 className="text-xl text-white font-medium bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-2">How was this experience?</h4>
                       <div className="flex gap-2">
@@ -447,7 +447,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                            initial={{ opacity: 0, height: 0, y: -10 }}
                            animate={{ opacity: 1, height: 'auto', y: 0 }}
                            exit={{ opacity: 0, height: 0 }}
-                           className="flex flex-col items-center w-full max-w-sm mt-4 gap-4 overflow-hidden"
+                           className="flex flex-col items-center w-full max-w-sm mt-2 gap-2 overflow-hidden"
                          >
                             {!showNote ? (
                                <Button variant="ghost" onClick={() => setShowNote(true)} className="text-amber-500 hover:text-amber-400 hover:bg-amber-500/10 rounded-full">
