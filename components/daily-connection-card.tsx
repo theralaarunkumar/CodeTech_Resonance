@@ -48,7 +48,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
     if (ratingSubmitted) {
       const timer = setTimeout(() => {
         window.location.reload()
-      }, 5000)
+      }, 2500)
       return () => clearTimeout(timer)
     }
   }, [ratingSubmitted])
@@ -204,42 +204,39 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                 <Loader2 className="w-4 h-4 animate-spin" /> Analyzing your dynamic...
               </p>
             </motion.div>
-          ) : !task ? (
-            // Local Timezone Shield: 
-            // Only show the "Tomorrow" timer if the task was completed TODAY in the user's LOCAL calendar.
-            (hasCompletedToday && lastTaskDate && new Date(lastTaskDate).toDateString() === new Date().toDateString()) ? (
-              <motion.div
-                key="completed-empty"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="flex flex-col items-center justify-center py-12 px-6 text-center relative overflow-hidden rounded-3xl"
-              >
-                {/* Starry Night Effect */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-0">
-                   <div className="absolute top-[10%] left-[10%] w-[60%] h-[60%] rounded-full bg-amber-500/5 blur-[80px] animate-mesh-breathe" />
-                   <div className="absolute bottom-[20%] right-[10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 blur-[80px] animate-mesh-breathe" style={{ animationDelay: '4s' }} />
-                   <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-ping" style={{ animationDuration: '3s' }} />
-                   <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-white/20 rounded-full animate-ping" style={{ animationDuration: '4s' }} />
-                   <div className="absolute bottom-1/4 left-1/2 w-1.5 h-1.5 bg-amber-300/30 rounded-full animate-ping" style={{ animationDuration: '5s' }} />
-                </div>
+          ) : hasCompletedToday && !ratingSubmitted ? (
+            <motion.div
+              key="completed-empty"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="flex flex-col items-center justify-center py-12 px-6 text-center relative overflow-hidden rounded-3xl"
+            >
+              {/* Starry Night Effect */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-0">
+                 <div className="absolute top-[10%] left-[10%] w-[60%] h-[60%] rounded-full bg-amber-500/5 blur-[80px] animate-mesh-breathe" />
+                 <div className="absolute bottom-[20%] right-[10%] w-[50%] h-[50%] rounded-full bg-orange-500/5 blur-[80px] animate-mesh-breathe" style={{ animationDelay: '4s' }} />
+                 <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-ping" style={{ animationDuration: '3s' }} />
+                 <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-white/20 rounded-full animate-ping" style={{ animationDuration: '4s' }} />
+                 <div className="absolute bottom-1/4 left-1/2 w-1.5 h-1.5 bg-amber-300/30 rounded-full animate-ping" style={{ animationDuration: '5s' }} />
+              </div>
 
-                <div className="relative z-10 flex flex-col items-center w-full mt-2">
-                  <div className="flex flex-col items-center justify-center mb-4 w-full">
-                     <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500/60 mb-2">NEXT GENERATION IN</span>
-                     <span className="text-4xl sm:text-5xl font-mono font-black text-amber-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">{timeLeft || "--:--:--"}</span>
-                  </div>
-                  
-                  <div className="w-24 h-24 rounded-full bg-stone-800/80 border border-stone-700/50 flex items-center justify-center mb-6 shadow-inner relative">
-                    <span className="text-5xl drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">🌙</span>
-                  </div>
-                  <h3 className="text-4xl font-extrabold text-white mb-2 tracking-tight drop-shadow-sm">Anticipating tomorrow...</h3>
-                  <p className="text-stone-300 max-w-md text-base leading-relaxed font-light">
-                     Your next evolution begins in <span className="font-bold text-amber-500">{timeLeft || "--:--"}</span>.
-                  </p>
+              <div className="relative z-10 flex flex-col items-center w-full mt-2">
+                <div className="flex flex-col items-center justify-center mb-4 w-full">
+                   <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500/60 mb-2">NEXT GENERATION IN</span>
+                   <span className="text-4xl sm:text-5xl font-mono font-black text-amber-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">{timeLeft || "--:--:--"}</span>
                 </div>
-              </motion.div>
-            ) : (
+                
+                <div className="w-24 h-24 rounded-full bg-stone-800/80 border border-stone-700/50 flex items-center justify-center mb-6 shadow-inner relative">
+                  <span className="text-5xl drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]">🌙</span>
+                </div>
+                <h3 className="text-4xl font-extrabold text-white mb-2 tracking-tight drop-shadow-sm">Anticipating tomorrow...</h3>
+                <p className="text-stone-300 max-w-md text-base leading-relaxed font-light">
+                   Your next evolution begins in <span className="font-bold text-amber-500">{timeLeft || "--:--"}</span>.
+                </p>
+              </div>
+            </motion.div>
+          ) : !task ? (
               <motion.div
                 key="empty"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -334,7 +331,6 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                    </div>
                 )}
               </motion.div>
-            )
           ) : ratingSubmitted ? (
             <motion.div
                key="submitted-state"
@@ -421,10 +417,10 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                  <motion.div 
                    initial={{ opacity: 0, scale: 0.95 }}
                    animate={{ opacity: 1, scale: 1 }}
-                   className="flex flex-col items-center gap-2 mt-4 w-full"
+                   className="flex flex-col items-center gap-2 mt-2 w-full"
                  >
-                      <h4 className="text-xl text-white font-medium bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-2">How was this experience?</h4>
-                      <div className="flex gap-2">
+                      <h4 className="text-lg text-white font-medium bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-1">How was this experience?</h4>
+                      <div className="flex gap-1.5">
                         {[1, 2, 3, 4, 5].map((starValue) => (
                             <button 
                               key={starValue}
@@ -433,7 +429,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                              onMouseEnter={() => setHoveredStar(starValue)}
                              onMouseLeave={() => setHoveredStar(null)}
                            >
-                             <Star className={`w-10 h-10 ${
+                             <Star className={`w-8 h-8 ${
                                (hoveredStar ?? rating ?? 0) >= starValue 
                                ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]' 
                                : 'text-stone-600/50 hover:text-stone-400'
