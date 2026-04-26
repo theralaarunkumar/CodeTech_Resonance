@@ -86,6 +86,8 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
 
       if (allTasks && allTasks.length > 0) {
         const absoluteLatest = allTasks[0];
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
         const latestTaskTime = new Date(absoluteLatest.created_at).getTime();
         const currentTime = new Date().getTime();
         const hoursSinceTask = (currentTime - latestTaskTime) / (1000 * 60 * 60);
