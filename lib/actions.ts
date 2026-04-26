@@ -81,11 +81,12 @@ export async function saveOnboarding(data: any) {
   if (error) return { error: error.message }
 
   // Initialize the profile vibe so the dashboard redirect is satisfied
-  await supabase.from('profiles').update({
+  await supabase.from('profiles').upsert({
+    id: user.id,
     personal_vibe: 'Relaxed', // Default starting point
     intensity_level: 50,
     vibe_updated_at: new Date().toISOString()
-  }).eq('id', user.id)
+  }, { onConflict: 'id' })
 
   revalidatePath('/dashboard')
   revalidatePath('/onboarding')

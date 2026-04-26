@@ -96,7 +96,8 @@ export default function OnboardingPage() {
       } else {
         setShowSuccess(true)
         setTimeout(() => {
-          router.push("/dashboard")
+          // Force a full location change to break any client-side cache loops
+          window.location.href = "/dashboard"
         }, 3000)
       }
     }
