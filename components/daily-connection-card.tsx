@@ -139,13 +139,8 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
       animate={{ 
         opacity: 1, 
         scale: 1,
-        boxShadow: !task && !hasCompletedToday && !userVibe ? [
-          "0px 0px 20px rgba(245,158,11,0.05)",
-          "0px 0px 40px rgba(245,158,11,0.2)",
-          "0px 0px 20px rgba(245,158,11,0.05)"
-        ] : "0px 0px 40px rgba(245,158,11,0.05)"
+        boxShadow: "0px 0px 60px rgba(245,158,11,0.08)"
       }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       className="w-full max-w-2xl mx-auto"
     >
     <Card className="border-amber-500/10 bg-[#0c0a09]/80 backdrop-blur-xl relative overflow-hidden w-full shadow-2xl">
@@ -326,16 +321,24 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
           ) : ratingSubmitted ? (
             <motion.div
                key="submitted-state"
-               initial={{ opacity: 0, scale: 0.9, x: 50 }}
-               animate={{ opacity: 1, scale: 1, x: 0 }}
-               exit={{ opacity: 0, x: -50 }}
-               className="flex flex-col items-center justify-center space-y-4 py-8"
+               initial={{ opacity: 0, scale: 0.9, y: 20 }}
+               animate={{ opacity: 1, scale: 1, y: 0 }}
+               className="flex flex-col items-center justify-center space-y-6 py-12 text-center"
             >
-               <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mb-4">
-                 <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+               <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2 border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                 <CheckCircle2 className="w-10 h-10 text-emerald-400" />
                </div>
-               <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200 mb-2">Journey Updated!</h3>
-               <p className="text-slate-400 text-lg">Your resonance grows stronger. See your history in The Journey.</p>
+               <div className="space-y-2">
+                 <h3 className="text-4xl font-black text-white tracking-tighter">Connection Synchronized.</h3>
+                 <p className="text-emerald-400/80 font-bold tracking-tight text-lg">Your ritual has been archived in the Journey.</p>
+               </div>
+               
+               <div className="pt-8 border-t border-white/5 w-full max-w-xs text-center">
+                  <p className="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Establishing Next Frequency</p>
+                  <div className="text-4xl font-mono font-black text-amber-500/90 drop-shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                     {timeLeft || "23:59:59"}
+                  </div>
+               </div>
             </motion.div>
           ) : (
             <motion.div

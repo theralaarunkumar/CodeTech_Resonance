@@ -6,7 +6,7 @@ export function VibrantPulse(props: React.SVGProps<SVGSVGElement>) {
       viewBox="0 0 100 100" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
-      className={`animate-logo-pulse text-amber-500 ${props.className || ''}`}
+      className={`text-amber-500 ${props.className || ''}`}
       {...props}
     >
       <path 

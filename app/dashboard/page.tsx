@@ -172,7 +172,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
           <div className="w-full h-full flex flex-col justify-center max-w-6xl mx-auto items-center">
             <div className="text-center space-y-1 mb-2">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tighter leading-none text-white">
-                Welcome to <span className="text-transparent bg-clip-text bg-[linear-gradient(110deg,#fbbf24,45%,#fde68a,55%,#fbbf24)] bg-[length:250%_100%] animate-[shimmer_4s_linear_infinite]">Resonance</span>, {displayName}.
+                Welcome to <span className="text-amber-400">Resonance</span>, {displayName}.
               </h1>
               <p className="text-xs sm:text-sm font-bold tracking-tight text-amber-200/90 max-w-lg mx-auto">
                  Your journey to deeper connections begins now. Ensure your partner is linked before continuing.
@@ -239,7 +239,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             {/* Middle Section: Today's Focus & Connection */}
             <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col space-y-8 overflow-y-auto scrollbar-hide transition-all duration-500 hover:border-amber-500/30 shadow-2xl h-full pb-44">
                <div className="flex items-center gap-2 px-3 py-1 bg-white/[0.03] border border-white/5 w-fit rounded-full mx-auto shadow-inner">
-                  <div className="w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.8)] animate-pulse" />
+                  <div className="w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.8)]" />
                   <p className="text-[9px] uppercase tracking-[0.2em] text-[#a1a1aa] font-black">TODAY'S FOCUS</p>
                </div>
 
