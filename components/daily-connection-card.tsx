@@ -164,7 +164,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="relative z-10 min-h-[160px] flex flex-col justify-center">
+      <CardContent className="relative z-10 min-h-[160px] flex flex-col justify-center py-2">
         {error && (
           <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-400 text-center border border-red-500/20">
             {error}
@@ -208,9 +208,9 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                 </div>
 
                 <div className="relative z-10 flex flex-col items-center w-full">
-                  <div className="flex flex-col items-center justify-center mb-10 w-full">
-                     <span className="text-xs font-bold uppercase tracking-[0.3em] text-amber-500 mb-2">NEXT GENERATION IN</span>
-                     <span className="text-6xl sm:text-7xl md:text-8xl font-mono font-black text-amber-400 drop-shadow-[0_0_30px_rgba(245,158,11,0.5)]">{timeLeft || "--:--:--"}</span>
+                  <div className="flex flex-col items-center justify-center mb-6 w-full">
+                     <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500/60 mb-2">NEXT GENERATION IN</span>
+                     <span className="text-4xl sm:text-5xl font-mono font-black text-amber-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">{timeLeft || "--:--:--"}</span>
                   </div>
                   
                   <div className="w-24 h-24 rounded-full bg-stone-800/80 border border-stone-700/50 flex items-center justify-center mb-6 shadow-inner relative">
@@ -351,10 +351,10 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
               className="flex flex-col items-center text-center w-full"
             >
                {/* 3D Flip Card Container */}
-               <div 
-                 className="relative w-full min-h-[300px] cursor-pointer"
-                 onClick={() => !task.is_completed && setIsFlipped(!isFlipped)}
-               >
+                <div 
+                  className="relative w-full min-h-[260px] cursor-pointer"
+                  onClick={() => !task.is_completed && setIsFlipped(!isFlipped)}
+                >
                  <motion.div
                    initial={false}
                    animate={{ rotateY: isFlipped ? 180 : 0 }}

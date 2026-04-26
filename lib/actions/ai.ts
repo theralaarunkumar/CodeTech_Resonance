@@ -117,7 +117,7 @@ No markdown blocks, just raw JSON.`
 
     if (insertError) {
       console.error("Supabase Insertion Error:", insertError)
-      return { error: 'Failed to save generated task to the database.' }
+      return { error: `Database Error: ${insertError.message}` }
     }
 
     revalidatePath('/dashboard')
