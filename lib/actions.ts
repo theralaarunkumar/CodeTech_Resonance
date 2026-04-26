@@ -14,51 +14,8 @@ export async function initInviteCode() {
     .eq('id', user.id)
     .maybeSingle()
   
-  if (fetchError) {
-    console.error("Error fetching profile:", fetchError)
-    // If it's a "not found" error, we can still proceed with upsert
-  }
-
-  if (!profile?.invite_code) {
-    const code = 'RES-' + Math.random().toString(36).substring(2, 8).toUpperCase()
-    
-    // First, try a direct update since we know the row likely exists (from the DB screenshot)
-    const { data: updatedData, error: updateError } = await supabase
-      .from('profiles')
-      .update({ invite_code: code })
-      .eq('id', user.id)
-      .select('invite_code')
-      .single()
-
-    if (updateError) {
-      console.warn("Update failed, trying upsert:", updateError.message)
-      // If update fails, try upsert
-      const { data: upsertData, error: upsertError } = await supabase
-        .from('profiles')
-        .upsert({ id: user.id, invite_code: code }, { onConflict: 'id' })
-        .select('invite_code')
-        .maybeSingle()
-
-      if (upsertError) {
-        console.error("Failed to save invite code via upsert:", upsertError)
-        return { error: `Database error: ${upsertError.message}` }
-      }
-      
-      if (!upsertData?.invite_code) {
-         return { error: "Database rejected the code (check RLS or triggers)." }
-      }
-      
-      revalidatePath('/dashboard')
-      return { code: upsertData.invite_code }
-    }
-    
-    if (!updatedData?.invite_code) {
-       return { error: "Update succeeded but returned no code. This suggests a trigger or RLS issue." }
-    }
-
-    revalidatePath('/dashboard')
-    return { code: updatedData.invite_code }
-  }
+  if (fetchError) return { error: `Fetch error: ${fetchError.message}` }
+  if (!profile?.invite_code) return { error: "Code not found. Please refresh." }
   
   return { code: profile.invite_code }
 }
