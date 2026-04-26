@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0c0a09;
+    --foreground: #fafaf9;
+    --primary: #f59e0b;
+    --primary-foreground: #000000;
+    --card: #1c1917;
+    --card-foreground: #fafaf9;
+    --border: #2e2a27;
+    --input: #2e2a27;
+    --ring: #f59e0b;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-stone-50 antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes mesh-breathe {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.2; }
+  50% { transform: scale(1.1) translate(2%, 2%); opacity: 0.35; }
+}
+
+.animate-mesh-breathe {
+  animation: mesh-breathe 8s ease-in-out infinite;
+}

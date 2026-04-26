@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance Design Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            },
+            indigo: {
+              500: '#6366f1',
+              600: '#4f46e5',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@11.0.8/dist/framer-motion.js"></script>
+</head>
+<body class="bg-slate-950 font-sans text-slate-50 antialiased selection:bg-indigo-500/30">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { motion } = window.Motion;
+
+    function VibrantPulse(props) {
+      return (
+        <svg 
+          viewBox="0 0 100 100" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <path 
+            d="M50 85 C 20 60, 5 35, 15 20 C 25 5, 45 15, 50 35 C 55 15, 75 5, 85 20 C 95 35, 80 60, 50 85" 
+            stroke="#6366f1" 
+            strokeWidth="3" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="opacity-80 drop-shadow-md"
+          />
+          <path 
+            d="M50 85 C 40 70, 20 50, 25 30 C 30 15, 45 25, 50 45 C 55 25, 70 15, 75 30 C 80 50, 60 70, 50 85" 
+            stroke="#818cf8" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="opacity-50"
+            strokeDasharray="6 4"
+          />
+        </svg>
+      );
+    }
+
+    function App() {
+      return (
+        <div className="relative min-h-screen overflow-hidden">
+          {/* Mesh Gradient Background */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-600/20 blur-[120px]" />
+            <div className="absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-indigo-900/20 blur-[120px]" />
+            <div className="absolute -bottom-[20%] left-[20%] w-[60%] h-[60%] rounded-full bg-slate-800/40 blur-[120px]" />
+          </div>
+
+          {/* Glassmorphic Header */}
+          <header className="relative z-10 flex w-full items-center justify-between border-b border-white/5 bg-white/5 px-6 py-4 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <VibrantPulse className="h-8 w-8" />
+              <span className="text-xl font-medium tracking-wide text-white">Resonance</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <a href="#" className="inline-flex items-center justify-center rounded-full bg-indigo-500 px-6 py-2 text-sm font-medium text-white hover:bg-indigo-600 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all">
+                Sign In
+              </a>
+            </div>
+          </header>
+
+          {/* Hero Section */}
+          <main className="relative z-10 flex flex-col items-center justify-center px-6 pt-24 pb-24 text-center sm:pt-32">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="flex w-full max-w-4xl flex-col items-center space-y-8"
+            >
+              <div className="flex items-center justify-center rounded-2xl bg-indigo-500/10 p-4 ring-1 ring-white/10 backdrop-blur-sm shadow-[0_0_30px_rgba(99,102,241,0.2)]">
+                <VibrantPulse className="h-12 w-12 drop-shadow-lg" />
+              </div>
+              
+              <h1 className="text-5xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-white via-slate-200 to-slate-400">
+                Deepen your bond, <br className="hidden sm:block" /> naturally.
+              </h1>
+              
+              <p className="max-w-2xl text-lg font-light leading-relaxed text-slate-400 sm:text-xl">
+                Experience a premium platform designed to nurture your relationships with adaptive, personalized daily engagements. Stay emotionally connected without the cognitive overload.
+              </p>
+
+              <div className="mt-4 flex flex-col gap-4 sm:flex-row">
+                <a href="#" className="inline-flex items-center justify-center rounded-full bg-indigo-500 px-8 py-3 text-base font-medium shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:bg-indigo-600 hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all duration-300 text-white">
+                  Start Your Journey
+                </a>
+                <a href="#" className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/50 px-8 py-3 text-base font-medium text-slate-300 backdrop-blur-sm hover:bg-slate-800 hover:text-white transition-all duration-300">
+                  Welcome Back
+                </a>
+              </div>
+            </motion.div>
+          </main>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
