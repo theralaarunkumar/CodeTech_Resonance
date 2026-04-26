@@ -55,7 +55,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>
-    if (!task && hasCompletedToday) {
+    if (hasCompletedToday) {
       const calculateTimeLeft = () => {
         const now = new Date()
         const midnight = new Date()
