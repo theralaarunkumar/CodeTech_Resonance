@@ -22,9 +22,12 @@ export function PartnerLinkForm() {
       if (result?.error) {
         setError(result.error)
       } else {
-        setSuccess("Success! Reloading dashboard...")
-        // Force router refresh
-        router.refresh()
+        setSuccess("Connection established! Taking you to vibe check...")
+        if (result.redirect) {
+          router.push(result.redirect)
+        } else {
+          router.refresh()
+        }
       }
     })
   }

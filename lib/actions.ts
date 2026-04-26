@@ -61,7 +61,8 @@ export async function linkPartner(formData: FormData) {
   if (partnerError) return { error: `RLS Error updating your partner's profile: ${partnerError.message}` }
 
   revalidatePath('/dashboard')
-  return { success: true }
+  revalidatePath('/onboarding')
+  return { success: true, redirect: '/onboarding' }
 }
 
 export async function saveOnboarding(data: any) {

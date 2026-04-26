@@ -62,6 +62,10 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
       inviteCode = profile.invite_code;
     }
 
+    if (!userVibe) {
+      redirect("/onboarding")
+    }
+
     if (partnerId) {
       const { data: partnerProfile } = await supabase
         .from("profiles")
