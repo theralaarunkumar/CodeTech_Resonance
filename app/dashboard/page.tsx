@@ -252,6 +252,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
                     <DailyConnectionCard 
                       initialTask={latestTask} 
                       hasCompletedToday={hasCompletedToday} 
+                      lastTaskDate={latestTask?.created_at}
                       userVibe={userVibe} 
                       partnerHasCheckedIn={partnerHasCheckedIn}
                       partnerName={partnerFirstName}

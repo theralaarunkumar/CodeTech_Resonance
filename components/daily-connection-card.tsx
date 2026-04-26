@@ -24,9 +24,10 @@ interface Props {
   partnerHasCheckedIn?: boolean
   partnerName?: string
   userIntensity?: number
+  lastTaskDate?: string | null
 }
 
-export function DailyConnectionCard({ initialTask, hasCompletedToday = false, userVibe, partnerHasCheckedIn, partnerName = "Partner", userIntensity = 50 }: Props) {
+export function DailyConnectionCard({ initialTask, hasCompletedToday = false, userVibe, partnerHasCheckedIn, partnerName = "Partner", userIntensity = 50, lastTaskDate }: Props) {
   const [task, setTask] = useState<DailyTask | null>(initialTask)
   const [intensity, setIntensity] = useState<number>(userIntensity)
   const [loading, setLoading] = useState(false)
@@ -192,7 +193,9 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
               </p>
             </motion.div>
           ) : !task ? (
-            hasCompletedToday ? (
+            // Local Timezone Shield: 
+            // Only show the "Tomorrow" timer if the task was completed TODAY in the user's LOCAL calendar.
+            (hasCompletedToday && lastTaskDate && new Date(lastTaskDate).toDateString() === new Date().toDateString()) ? (
               <motion.div
                 key="completed-empty"
                 initial={{ opacity: 0, scale: 0.95 }}
