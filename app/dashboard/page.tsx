@@ -267,6 +267,9 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
                  <div className="w-full p-3 bg-white/[0.02] border border-white/5 rounded-3xl backdrop-blur-sm">
                    <VibeController initialMood={userVibe} initialIntensity={userIntensity} isCompact={true} />
                  </div>
+                 <div className="pt-2">
+                    <ConnectionCodeCard initialCode={inviteCode} />
+                 </div>
                </div>
 
                <div className="w-full pt-6 border-t border-white/5 mt-auto">

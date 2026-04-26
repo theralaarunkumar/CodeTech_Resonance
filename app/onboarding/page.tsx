@@ -59,6 +59,8 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   
+  const [showSuccess, setShowSuccess] = useState(false)
+  
   const [data, setData] = useState<OnboardingData>({
     communication: "",
     expectations: "",
@@ -92,7 +94,10 @@ export default function OnboardingPage() {
         setError(result.error)
         setLoading(false)
       } else {
-        router.push("/dashboard")
+        setShowSuccess(true)
+        setTimeout(() => {
+          router.push("/dashboard")
+        }, 3000)
       }
     }
   }
@@ -140,83 +145,106 @@ export default function OnboardingPage() {
 
         <Card className="border-amber-500/10 bg-white/5 backdrop-blur-xl relative overflow-hidden min-h-[400px] flex flex-col shadow-2xl rounded-[2rem]">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -50, opacity: 0 }}
-              transition={{ ease: "easeInOut", duration: 0.3 }}
-              className="flex flex-col flex-1"
-            >
-              <CardHeader className="text-center pt-8">
-                <CardTitle className="text-3xl font-extrabold tracking-tight text-stone-50">{steps[currentStep].title}</CardTitle>
-                <CardDescription className="text-amber-200/70 text-base mt-2 font-medium">
-                  {steps[currentStep].description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1 px-8 pb-8 flex flex-col justify-center">
-                
-                {error && (
-                  <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-400 text-center border border-red-500/20">
-                    {error}
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {steps[currentStep].options.map((option) => {
-                    const stepId = steps[currentStep].id
-                    let isSelected = false
-                    if (stepId === "communication") isSelected = data.communication === option
-                    else if (stepId === "expectations") isSelected = data.expectations === option
-                    else if (stepId === "interests") isSelected = data.interests.includes(option)
-
-                    return (
-                      <button
-                        key={option}
-                        onClick={() => {
-                          if (stepId === "interests") {
-                            handleSelectMultiple(stepId, option)
-                          } else {
-                            handleSelectSingle(stepId as any, option)
-                          }
-                        }}
-                        className={`p-4 rounded-2xl text-left border transition-all duration-300 flex items-center group ${
-                          isSelected 
-                            ? "bg-amber-500/10 border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.15)] text-amber-50" 
-                            : "bg-white/[0.02] border-white/5 text-stone-400 hover:border-amber-500/30 hover:bg-white/[0.05]"
-                        }`}
-                      >
-                        <div className={`w-4 h-4 mr-3 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                          isSelected ? "border-amber-400 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.4)]" : "border-stone-700 bg-stone-900/50"
-                        }`}>
-                          {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-full shadow-sm" />}
-                        </div>
-                        <span className="text-sm font-bold tracking-tight">{option}</span>
-                      </button>
-                    )
-                  })}
+            {showSuccess ? (
+              <motion.div
+                key="success"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="flex flex-col flex-1 items-center justify-center p-8 text-center space-y-6"
+              >
+                <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                  <svg className="w-10 h-10 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
-              </CardContent>
-            </motion.div>
-          </AnimatePresence>
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-black text-white">Vibe Validated.</h2>
+                  <p className="text-emerald-400/80 font-medium tracking-tight">Your energy has been successfully synced.</p>
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <Loader2 className="w-6 h-6 text-emerald-500 animate-spin" />
+                  <p className="text-stone-500 text-sm font-bold uppercase tracking-widest animate-pulse">Initializing your dashboard...</p>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={currentStep}
+                initial={{ x: 50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: -50, opacity: 0 }}
+                transition={{ ease: "easeInOut", duration: 0.3 }}
+                className="flex flex-col flex-1"
+              >
+                <CardHeader className="text-center pt-8">
+                  <CardTitle className="text-3xl font-extrabold tracking-tight text-stone-50">{steps[currentStep].title}</CardTitle>
+                  <CardDescription className="text-amber-200/70 text-base mt-2 font-medium">
+                    {steps[currentStep].description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1 px-8 pb-8 flex flex-col justify-center">
+                  
+                  {error && (
+                    <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-400 text-center border border-red-500/20">
+                      {error}
+                    </div>
+                  )}
 
-          <CardFooter className="flex justify-between border-t border-white/5 bg-white/[0.02] p-6">
-            <Button 
-              variant="outline" 
-              onClick={handleBack} 
-              disabled={currentStep === 0 || loading}
-              className="rounded-full border-white/10 bg-transparent text-stone-400 hover:bg-white/5 hover:text-white transition-all duration-300"
-            >
-              Back
-            </Button>
-            <Button 
-              onClick={handleNext} 
-              disabled={isNextDisabled() || loading}
-              className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 min-w-[140px] h-11 text-sm font-bold text-white border-0 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 transition-all duration-300"
-            >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : currentStep === steps.length - 1 ? "Complete Validation" : "Continue"}
-            </Button>
-          </CardFooter>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {steps[currentStep].options.map((option) => {
+                      const stepId = steps[currentStep].id
+                      let isSelected = false
+                      if (stepId === "communication") isSelected = data.communication === option
+                      else if (stepId === "expectations") isSelected = data.expectations === option
+                      else if (stepId === "interests") isSelected = data.interests.includes(option)
+
+                      return (
+                        <button
+                          key={option}
+                          onClick={() => {
+                            if (stepId === "interests") {
+                              handleSelectMultiple(stepId, option)
+                            } else {
+                              handleSelectSingle(stepId as any, option)
+                            }
+                          }}
+                          className={`p-4 rounded-2xl text-left border transition-all duration-300 flex items-center group ${
+                            isSelected 
+                              ? "bg-amber-500/10 border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.15)] text-amber-50" 
+                              : "bg-white/[0.02] border-white/5 text-stone-400 hover:border-amber-500/30 hover:bg-white/[0.05]"
+                          }`}
+                        >
+                          <div className={`w-4 h-4 mr-3 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                            isSelected ? "border-amber-400 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.4)]" : "border-stone-700 bg-stone-900/50"
+                          }`}>
+                            {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-full shadow-sm" />}
+                          </div>
+                          <span className="text-sm font-bold tracking-tight">{option}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </CardContent>
+                
+                <CardFooter className="flex justify-between border-t border-white/5 bg-white/[0.02] p-6 mt-auto">
+                  <Button 
+                    variant="outline" 
+                    onClick={handleBack} 
+                    disabled={currentStep === 0 || loading}
+                    className="rounded-full border-white/10 bg-transparent text-stone-400 hover:bg-white/5 hover:text-white transition-all duration-300"
+                  >
+                    Back
+                  </Button>
+                  <Button 
+                    onClick={handleNext} 
+                    disabled={isNextDisabled() || loading}
+                    className="rounded-full bg-gradient-to-r from-orange-500 to-amber-500 min-w-[140px] h-11 text-sm font-bold text-white border-0 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 transition-all duration-300"
+                  >
+                    {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : currentStep === steps.length - 1 ? "Complete Validation" : "Continue"}
+                  </Button>
+                </CardFooter>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </Card>
       </div>
     </div>
