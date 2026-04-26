@@ -94,11 +94,10 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
 
         // If a task exists from the last 24 hours, the day is NOT empty
         if (hoursSinceTask < 24) {
+          latestTask = absoluteLatest;
           if (absoluteLatest.rating !== null) {
             hasCompletedToday = true;
-            latestTask = null;
           } else {
-            latestTask = absoluteLatest;
             hasCompletedToday = false;
           }
         } else {

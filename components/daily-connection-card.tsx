@@ -387,7 +387,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 mb-4 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
                        {task.category}
                      </span>
-                      <h3 className="text-xl font-bold text-white mb-2">{task.title}</h3>
+                      <h3 className="text-lg font-black text-white mb-2 leading-tight px-6 text-center">{task.title}</h3>
                      <p className="text-base text-stone-300 max-w-xl mx-auto leading-relaxed">
                        {task.description}
                      </p>
