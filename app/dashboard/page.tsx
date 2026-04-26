@@ -227,8 +227,12 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
                           <p className="text-xs font-bold text-stone-200">
                             {partnerFirstName}
                           </p>
-                          <p className="text-[10px] text-stone-500 font-medium">
-                            {partnerHasCheckedIn ? "Ready to connect" : "Reflecting..."}
+                          <p className="text-[10px] font-bold transition-colors duration-500">
+                            {partnerHasCheckedIn ? (
+                              <span className="text-emerald-500">Energy Synced</span>
+                            ) : (
+                              <span className="text-stone-500">Linked & Waiting</span>
+                            )}
                           </p>
                        </div>
                      </div>
