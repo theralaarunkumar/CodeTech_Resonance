@@ -172,12 +172,14 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
           Daily Connection
         </CardTitle>
         {/* Dashboard Sub-header Update */}
-        <CardDescription className="text-sm font-medium text-stone-400 mt-1">
-          The AI has synthesized your vibes. Ready to connect?
-        </CardDescription>
+        {!task && !hasCompletedToday && (
+          <CardDescription className="text-stone-400 text-[10px] mt-1 max-w-[200px] mx-auto leading-tight">
+            The AI has synthesized your vibes. Ready to connect?
+          </CardDescription>
+        )}
       </CardHeader>
 
-      <CardContent className="relative z-10 min-h-[160px] flex flex-col justify-center py-1">
+      <CardContent className="relative z-10 max-h-[480px] overflow-y-auto scrollbar-hide flex flex-col justify-center py-1 px-4">
         {error && (
           <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-400 text-center border border-red-500/20">
             {error}
@@ -429,7 +431,6 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                               onClick={() => setRating(starValue)}
                              onMouseEnter={() => setHoveredStar(starValue)}
                              onMouseLeave={() => setHoveredStar(null)}
-                             className="p-1 transition-all hover:scale-110 focus:outline-none"
                            >
                              <Star className={`w-10 h-10 ${
                                (hoveredStar ?? rating ?? 0) >= starValue 

@@ -91,15 +91,17 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
         const taskDate = new Date(absoluteLatest.created_at);
         taskDate.setHours(0, 0, 0, 0);
 
-        if (taskDate.getTime() === today.getTime()) {
+        if (taskDate.getTime() === today.getTime() || (new Date().getTime() - new Date(absoluteLatest.created_at).getTime() < 18 * 60 * 60 * 1000)) {
           if (absoluteLatest.rating !== null) {
             hasCompletedToday = true;
             latestTask = null;
           } else {
             latestTask = absoluteLatest;
+            hasCompletedToday = false;
           }
         } else {
           latestTask = null;
+          hasCompletedToday = false;
         }
 
         const ratedTasks = allTasks.filter((t: any) => t.rating !== null);
