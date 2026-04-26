@@ -81,7 +81,8 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
         .from("daily_tasks")
         .select("*")
         .or(`user_id.eq.${data.user.id},partner_id.eq.${data.user.id}`)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .limit(10);
 
       if (allTasks && allTasks.length > 0) {
         const absoluteLatest = allTasks[0];

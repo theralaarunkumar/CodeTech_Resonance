@@ -43,6 +43,16 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
   const [timeLeft, setTimeLeft] = useState("")
   const [isFlipped, setIsFlipped] = useState(false)
 
+  // Auto-refresh after successful submission
+  useEffect(() => {
+    if (ratingSubmitted) {
+      const timer = setTimeout(() => {
+        window.location.reload()
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [ratingSubmitted])
+
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>
     if (!task && hasCompletedToday) {
@@ -167,7 +177,7 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="relative z-10 min-h-[160px] flex flex-col justify-center py-2">
+      <CardContent className="relative z-10 min-h-[160px] flex flex-col justify-center py-1">
         {error && (
           <div className="mb-4 rounded-md bg-red-500/10 p-3 text-sm text-red-400 text-center border border-red-500/20">
             {error}
@@ -212,8 +222,8 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                    <div className="absolute bottom-1/4 left-1/2 w-1.5 h-1.5 bg-amber-300/30 rounded-full animate-ping" style={{ animationDuration: '5s' }} />
                 </div>
 
-                <div className="relative z-10 flex flex-col items-center w-full">
-                  <div className="flex flex-col items-center justify-center mb-6 w-full">
+                <div className="relative z-10 flex flex-col items-center w-full mt-2">
+                  <div className="flex flex-col items-center justify-center mb-4 w-full">
                      <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500/60 mb-2">NEXT GENERATION IN</span>
                      <span className="text-4xl sm:text-5xl font-mono font-black text-amber-400 drop-shadow-[0_0_20px_rgba(245,158,11,0.4)]">{timeLeft || "--:--:--"}</span>
                   </div>
@@ -275,11 +285,11 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                   </>
                 ) : (
                   <>
-                    <div className="w-16 h-16 rounded-full bg-amber-500 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(245,158,11,0.4)]">
-                      <Sparkles className="w-8 h-8 text-amber-950" />
+                    <div className="w-14 h-14 rounded-full bg-amber-500 flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                      <Sparkles className="w-7 h-7 text-amber-950" />
                     </div>
-                    <h2 className="text-xl font-black text-white mb-2 tracking-tight">Resonance Found.</h2>
-                    <p className="text-stone-400 mb-8 max-w-xs text-base leading-relaxed font-medium">
+                    <h2 className="text-lg font-black text-white mb-1 tracking-tight">Resonance Found.</h2>
+                    <p className="text-stone-500 mb-6 max-w-xs text-xs leading-relaxed font-medium px-4">
                       Your energy is aligned. Reveal your personal ritual.
                     </p>
                     <Button 
@@ -333,12 +343,12 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2 border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.2)]">
                  <CheckCircle2 className="w-10 h-10 text-emerald-400" />
                </div>
-               <div className="space-y-2">
-                 <h3 className="text-4xl font-black text-white tracking-tighter">Connection Synchronized.</h3>
-                 <p className="text-emerald-400/80 font-bold tracking-tight text-lg">Your ritual has been archived in the Journey.</p>
-               </div>
-               
-               <div className="pt-8 border-t border-white/5 w-full max-w-xs text-center">
+                <div className="space-y-1">
+                  <h3 className="text-2xl font-black text-white tracking-tight">Connection Synchronized.</h3>
+                  <p className="text-emerald-400/80 font-bold tracking-tight text-sm">Your ritual has been archived in the Journey.</p>
+                </div>
+                
+                <div className="pt-4 border-t border-white/5 w-full max-w-xs text-center">
                   <p className="text-stone-500 text-[10px] font-black uppercase tracking-[0.3em] mb-4">Establishing Next Frequency</p>
                   <div className="text-4xl font-mono font-black text-amber-500/90 drop-shadow-[0_0_20px_rgba(245,158,11,0.3)]">
                      {timeLeft || "23:59:59"}
@@ -410,12 +420,13 @@ export function DailyConnectionCard({ initialTask, hasCompletedToday = false, us
                    animate={{ opacity: 1, scale: 1 }}
                    className="flex flex-col items-center gap-4 mt-6 w-full"
                  >
-                     <h4 className="text-2xl text-white font-medium bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-4">How was this experience?</h4>
-                     <div className="flex gap-3">
-                       {[1, 2, 3, 4, 5].map((starValue) => (
-                           <button 
-                             key={starValue}
-                             onClick={() => setRating(starValue)}
+                      <h4 className="text-xl text-white font-medium bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent mb-2">How was this experience?</h4>
+                      <div className="flex gap-2">
+                        {[1, 2, 3, 4, 5].map((starValue) => (
+                            <button 
+                              key={starValue}
+                              className="transition-transform active:scale-95"
+                              onClick={() => setRating(starValue)}
                              onMouseEnter={() => setHoveredStar(starValue)}
                              onMouseLeave={() => setHoveredStar(null)}
                              className="p-1 transition-all hover:scale-110 focus:outline-none"
