@@ -35,20 +35,20 @@ export function DashboardHeader({ loginTime, userName }: { loginTime: string | n
   }
 
   return (
-    <header className="sticky top-0 z-50 grid grid-cols-3 w-full items-center border-b border-stone-800/50 bg-[#0c0a09]/50 px-8 py-4 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 flex md:grid md:grid-cols-3 w-full items-center justify-between border-b border-stone-800/50 bg-[#0c0a09]/50 px-4 md:px-8 py-3 md:py-4 backdrop-blur-xl">
       <style>{`
         @keyframes shimmer {
           0% { background-position: 250% 0; }
           100% { background-position: -250% 0; }
         }
       `}</style>
-      <div className="flex items-center gap-4 group cursor-pointer justify-self-start" onClick={() => router.push('/dashboard')}>
-        <VibrantPulse className="h-9 w-9 group-hover:scale-105 transition-transform" />
-        <span className="text-xl font-bold tracking-tight text-transparent bg-clip-text bg-[linear-gradient(110deg,#fbbf24,45%,#fde68a,55%,#fbbf24)] bg-[length:250%_100%] animate-[shimmer_4s_linear_infinite]">Resonance</span>
+      <div className="flex items-center gap-3 md:gap-4 group cursor-pointer justify-self-start" onClick={() => router.push('/dashboard')}>
+        <VibrantPulse className="h-8 w-8 md:h-9 md:h-9 group-hover:scale-105 transition-transform" />
+        <span className="text-lg md:text-xl font-bold tracking-tight text-transparent bg-clip-text bg-[linear-gradient(110deg,#fbbf24,45%,#fde68a,55%,#fbbf24)] bg-[length:250%_100%] animate-[shimmer_4s_linear_infinite]">Resonance</span>
       </div>
 
-      {/* Navigation Widget in the Middle */}
-      <div className="flex items-center justify-self-center gap-1.5 p-1.5 rounded-full border border-white/5 bg-stone-900/40 backdrop-blur-xl shadow-inner">
+      {/* Navigation Widget in the Middle - Desktop Only */}
+      <div className="hidden md:flex items-center justify-self-center gap-1.5 p-1.5 rounded-full border border-white/5 bg-stone-900/40 backdrop-blur-xl shadow-inner">
         {navItems.map((item) => {
           const isActive = pathname === item.href
           const Icon = item.icon

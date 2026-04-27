@@ -13,7 +13,7 @@ export function NavigationBar() {
   ]
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex md:hidden">
       <div className="flex items-center gap-2 p-2 rounded-full border border-white/5 bg-[#0c0a09]/60 backdrop-blur-xl shadow-[0_0_40px_rgba(245,158,11,0.15)]">
         {navItems.map((item) => {
           const isActive = pathname === item.href

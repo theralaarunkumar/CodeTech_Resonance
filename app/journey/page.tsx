@@ -33,7 +33,7 @@ export default async function JourneyPage() {
     .order('created_at', { ascending: false })
 
   return (
-    <div className="flex h-screen flex-col bg-[#0c0a09] font-sans text-stone-50 relative overflow-hidden">
+    <div className="flex min-h-screen flex-col bg-[#0c0a09] font-sans text-stone-50 relative overflow-x-hidden">
         {/* Mesh Gradient Background (Dark & Subtle) */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-[#451a03]/20 blur-[120px] animate-mesh-breathe" />
@@ -100,7 +100,7 @@ export default async function JourneyPage() {
             
         </main>
         
-        {/* Navigation moved to DashboardHeader */}
+        <NavigationBar />
     </div>
   )
 }

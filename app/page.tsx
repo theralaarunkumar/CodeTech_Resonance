@@ -37,7 +37,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#0c0a09] font-sans text-stone-50 selection:bg-orange-500/30 flex flex-col justify-between py-6">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#0c0a09] font-sans text-stone-50 selection:bg-orange-500/30 flex flex-col justify-between py-6">
       <style>{`
         @keyframes shimmer {
           0% { background-position: 250% 0; }

@@ -148,7 +148,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#0c0a09] font-sans text-stone-50 relative overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#0c0a09] font-sans text-stone-50 relative overflow-x-hidden">
       {/* Mesh Gradient Background (Dark & Subtle) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className={cn(
@@ -171,7 +171,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
 
       <DashboardHeader loginTime={formattedTime} userName={displayName} />
 
-      <main className="relative z-10 w-full max-w-[1400px] mx-auto flex-1 flex flex-row px-6 gap-4 h-full py-4 overflow-hidden animate-in fade-in zoom-in duration-700">
+      <main className="relative z-10 w-full max-w-[1400px] mx-auto flex-1 flex flex-col px-4 md:px-6 gap-4 h-auto py-4 animate-in fade-in zoom-in duration-700 pb-24 md:pb-4">
         
         {!partnerId ? (
           <div className="w-full h-full flex flex-col justify-center max-w-6xl mx-auto items-center">
@@ -200,9 +200,9 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             </div>
           </div>
         ) : (
-          <div className="flex flex-row flex-1 h-full w-full gap-4 overflow-hidden pt-4 pb-4">
+          <div className="flex flex-col md:flex-row flex-1 h-auto w-full gap-4 pt-2 md:pt-4">
             {/* Left Section: Intelligence & Pulse */}
-            <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col items-center text-center space-y-6 overflow-y-auto scrollbar-hide transition-all duration-500 hover:border-amber-500/30 shadow-2xl h-full pb-44">
+            <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col items-center text-center space-y-6 transition-all duration-500 hover:border-amber-500/30 shadow-2xl h-auto min-h-[400px] md:h-full md:overflow-y-auto scrollbar-hide md:pb-12">
                <div className="w-full space-y-4">
                   <WeeklyResonance streak={streak} recentTasksSummaries={recentTasksSummaries} pulseData={pulseData} isCompact={true} showPulse={false} showStreak={true} showInsight={true} />
                </div>
@@ -246,7 +246,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             </div>
 
             {/* Middle Section: Today's Focus & Connection */}
-            <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col space-y-8 overflow-y-auto scrollbar-hide transition-all duration-500 hover:border-amber-500/30 shadow-2xl h-full pb-44">
+            <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col space-y-8 transition-all duration-500 hover:border-amber-500/30 shadow-2xl h-auto min-h-[400px] md:h-full md:overflow-y-auto scrollbar-hide md:pb-12">
                <div className="flex items-center gap-2 px-3 py-1 bg-white/[0.03] border border-white/5 w-fit rounded-full mx-auto shadow-inner">
                   <div className="w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.8)]" />
                   <p className="text-[9px] uppercase tracking-[0.2em] text-[#a1a1aa] font-black">TODAY'S FOCUS</p>
@@ -268,7 +268,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
             </div>
 
             {/* Right Section: Vibe Control & Preferences */}
-            <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col space-y-8 overflow-y-auto scrollbar-hide shadow-2xl h-full pb-44 transition-all duration-500 hover:border-amber-500/30">
+            <div className="flex-1 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2.5rem] p-6 flex flex-col space-y-8 shadow-2xl transition-all duration-500 hover:border-amber-500/30 h-auto min-h-[400px] md:h-full md:overflow-y-auto scrollbar-hide md:pb-12">
                <div className="space-y-4 flex-1">
                  <div className="w-full space-y-1 mb-4">
                     <p className="text-[11px] uppercase tracking-[0.2em] text-[#f59e0b] font-black text-center">EMOTIONAL SETTING</p>
@@ -295,6 +295,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: { 
           </div>
         )}
       </main>
+      <NavigationBar />
     </div>
   )
 }
