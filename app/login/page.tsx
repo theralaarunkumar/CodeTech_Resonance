@@ -35,9 +35,8 @@ export default function LoginPage() {
       setError(signInError.message)
       setLoading(false)
     } else {
-      router.refresh()
       router.push("/dashboard")
-      setLoading(false)
+      // We don't set loading to false here so the button stays disabled during navigation
     }
   }
 
